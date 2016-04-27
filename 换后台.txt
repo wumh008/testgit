@@ -1,0 +1,19 @@
+1、先把编译好的可执行文件放到10.3.13.104：~/bgfjj/160115/
+ftp 10.2.3.188
+zkr1
+asdfjkl;
+bin
+put tm_zbcl
+2、登录到某省中心app1
+   cd tmp
+   scp server@10.3.13.104:~/bgfjj/160115/tm_* ./
+   cd ../bin
+   tmshutdown -s tm_zbcl -H app2
+   tmshutdown -s tm_sjcl -H app2
+   ssh app2
+   cd bin
+   scp server@10.3.13.104:~/bgfjj/160115/tm_* ./
+   ssh app1
+   cd bin
+   tmshutdown -s tm_zbcl; cp ../tmp/tm_zbcl ./;tmboot -s tm_zbcl;
+   tmshutdown -s tm_sjcl; cp ../tmp/tm_sjcl ./;tmboot -s tm_sjcl;
